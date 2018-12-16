@@ -10,6 +10,10 @@ class useful_stuff:
     def __init__(self, bot):
         self.bot = bot 
 
+@commands.command(pass_context=True)
+async def say(self, ctx, *, content:str):
+    await ctx.send(content)
+
 @commands.command(name="8ball")
 async def ball(self, ctx):
     okbuddy = random.choice(differentball)
