@@ -100,19 +100,19 @@ async def help(ctx):
     await ctx.send(embed=embed)
 
 @bot.command(pass_context=True)
-async def load(extension):
+async def load(ctx, extension: str):
     try:
         bot.load_extension(extension)
-        print("loaded {}".format(extension))
+        ctx.send("loaded {}".format(extension))
     except Exception as error:
-        print("failed to load extension {} [{}]".format(extensions, error))
+        ctx.send("failed to load extension {} [{}]".format(extension, error))
 
 @bot.command(pass_context=True)
-async def unload(extensions):
+async def unload(ctx, extension: str):
     try:
         bot.unload_extension(extension)
-        print("unloaded {}".format(extension))
+        ctx.send("unloaded {}".format(extension))
     except Exception as error:
-        print("failed to unload extension {} [{}]".format(extensions, error))
+        ctx.send("failed to unload extension {} [{}]".format(extension, error))
 
 bot.run("TOKEN")

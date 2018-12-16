@@ -44,6 +44,5 @@ async def subtract(ctx, a: int, b: int):
 async def divide(ctx, a: int, b: int):
     await ctx.send(a / b)
 
-
 def setup(bot):
     bot.add_cog(useful_stuff(bot))
