@@ -1,6 +1,4 @@
 import discord
-import asyncio
-import youtube_dl
 import random
 
 from discord.ext import commands
