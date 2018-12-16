@@ -32,32 +32,32 @@ async def on_ready():
 
 @bot.command(pass_context=True)
 async def say(ctx, *, content:str):
-    await bot.say(content)
+    await ctx.send(content)
 
 @bot.command(name="8ball")
 async def ball(ctx):
     okbuddy = random.choice(differentball)
-    await bot.say(okbuddy)
+    await ctx.send(okbuddy)
 
 @bot.command(pass_context=True)
 async def dev(ctx): #this was all a mistake
-    await bot.say("my daddy is `speed#5496`")
+    await ctx.send("my daddy is `speed#5496`")
 
 @bot.command(pass_context=True)
 async def add(ctx, a: int, b: int):
-    await bot.say(a + b)
+    await ctx.send(a + b)
 
 @bot.command(pass_context=True)
 async def multiply(ctx, a: int, b: int):
-    await bot.say(a * b)
+    await ctx.send(a * b)
 
 @bot.command(pass_context=True)
 async def subtract(ctx, a: int, b: int):
-    await bot.say(a - b)
+    await ctx.send(a - b)
 
 @bot.command(pass_context=True)
 async def divide(ctx, a: int, b: int):
-    await bot.say(a / b)
+    await ctx.send(a / b)
 
 @bot.command(pass_context=True)
 async def join(ctx):
@@ -74,7 +74,7 @@ async def leave(ctx):
 async def pause(ctx):
     id = ctx.message.server.id
     players[id].pause()
-    await bot.say("ok")
+    await ctx.send("ok")
 
 @commands.command(pass_context=True)
 async def play( ctx, url):
@@ -88,15 +88,15 @@ async def play( ctx, url):
 async def resume(ctx):
     id = ctx.message.server.id
     players[id].resume()
-    await bot.say("hi welcome back")
+    await ctx.send("hi welcome back")
 
 @bot.command(pass_context=True)
 async def math(ctx): 
-    await bot.say("`subcommands` $add, $divide, $subtract, $multiply")
+    await ctx.send("`subcommands` $add, $divide, $subtract, $multiply")
 
 @bot.command(pass_context=True)
 async def invite(ctx): 
-    await bot.say("https://discordapp.com/api/oauth2/authorize?client_id=490953980361441281&permissions=8&scope=bot")
+    await ctx.send("https://discordapp.com/api/oauth2/authorize?client_id=490953980361441281&permissions=8&scope=bot")
 
 @bot.command(pass_context=True)
 async def help(ctx):
@@ -104,7 +104,7 @@ async def help(ctx):
     embed.add_field(name="useful stuff", value="`$say, $dev, $math, $8ball, $invite`", inline= True)
     embed.add_field(name="useless stuff", value="`nothing useless yet`", inline= True)
     embed.add_field(name="music", value="`$join, $leave, $play, $pause, $leave`")
-    await bot.say(embed=embed)
+    await ctx.send(embed=embed)
 
 @bot.command(pass_context=True)
 async def load(extension):
