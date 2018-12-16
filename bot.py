@@ -4,7 +4,7 @@ import random
 from discord.ext import commands
 from assets.list import *
 prefix = "$"
-bot = commands.AutoShardedBot(command_prefix=prefix)
+bot = commands.Bot(command_prefix=prefix)
 bot.remove_command('help')
 
 extensions = [
@@ -16,7 +16,7 @@ players = {}
 @bot.event
 async def on_ready():
     print("successful startup")
-    await bot.change_presence(status=discord.Status.online, activity=discord.Activity(name="fortnite 2", activity=discord.ActivityType.playing))
+    await bot.change_presence(game=discord.Game(name='fortnite 2'))
     for extension in extensions:
         try:
             bot.load_extension(extension)
