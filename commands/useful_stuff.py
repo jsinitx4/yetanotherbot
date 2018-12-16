@@ -20,6 +20,10 @@ async def ball(self, ctx):
     await ctx.send(okbuddy)
 
 @commands.command(pass_context=True)
+async def invite(self, ctx): 
+    await ctx.send("https://discordapp.com/api/oauth2/authorize?client_id=490953980361441281&permissions=8&scope=bot")
+
+@commands.command(pass_context=True)
 async def math(self, ctx): 
     await ctx.send("`subcommands` $add, $divide, $subtract, $multiply")
 
