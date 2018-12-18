@@ -8,8 +8,8 @@ bot = commands.Bot(command_prefix=prefix)
 bot.remove_command('help')
 
 extensions = [
-    "commands.useful_stuff"
-    "commands.music" #later usage
+    "commands.useful_stuff",
+    "commands.music"
     ]
 
 players = {}
