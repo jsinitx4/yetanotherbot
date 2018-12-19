@@ -1,2 +1,2 @@
 # yetanotherbot
-a bot that doesn't even work
+a meme discord bot coded in python 
