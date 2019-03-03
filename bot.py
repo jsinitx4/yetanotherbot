@@ -63,6 +63,8 @@ async def leave(ctx):
 
 @bot.command(pass_context=True)
 async def play(ctx, url):
+    channel = ctx.message.author.voice.voice_channel
+    await bot.join_voice_channel(channel)
     server = ctx.message.server
     voice_client = bot.voice_client_in(server)
     player = await voice_client.create_ytdl_player(url, after=lambda: check_queue(server.id))
