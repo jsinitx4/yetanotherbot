@@ -2,11 +2,13 @@ import discord
 import asyncio
 import youtube_dl
 import random
+import datetime
 
 import sys, traceback
 
 from discord.ext import commands
 from assets.list import *
+from assets.ping import *
 prefix = "$"
 bot = commands.Bot(command_prefix=prefix)
 bot.remove_command('help')
@@ -54,6 +56,13 @@ async def divide(ctx, a: int, b: int):
 async def join(ctx):
     channel = ctx.message.author.voice.voice_channel
     await bot.join_voice_channel(channel)
+
+@bot.command(pass_context=True)
+async def ping(ctx):
+    ron = random.choice(ping1)
+    pong = await bot.say(ron)
+    ms = (pong.timestamp-ctx.message.timestamp).total_seconds() * 1000
+    await bot.edit_message(pong, new_content='{}ms'.format(int(ms)))
 
 @bot.command(pass_context=True)
 async def leave(ctx):
@@ -111,9 +120,9 @@ async def queue(ctx, url):
 @bot.command(pass_context=True)
 async def help(ctx):
     embed=discord.Embed(title="help", description="thank you pylint, very cool!", color=0x00FFDD)
-    embed.add_field(name="useful stuff", value="`$say, $dev, $math, $8ball, $invite`", inline= True)
+    embed.add_field(name="useful stuff", value="`$say, $dev, $math, $8ball, $invite, $ping`", inline= True)
     embed.add_field(name="useless stuff", value="`nothing useless yet`", inline= True)
     embed.add_field(name="music", value="`$join, $leave, $play, $pause, $resume, $queue`")
     await bot.say(embed=embed)
-            
+    
 bot.run("TOKEN")
