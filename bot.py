@@ -12,6 +12,13 @@ bot = commands.Bot(command_prefix=prefix)
 bot.remove_command('help')
 
 players = {}
+queues = {}
+
+def check_queue(id):
+    if queues[id] != []:
+        player = queues[id].pop(0)
+        players[id] = player
+        player.start()
 
 @bot.event
 async def on_ready():
@@ -58,7 +65,7 @@ async def leave(ctx):
 async def play(ctx, url):
     server = ctx.message.server
     voice_client = bot.voice_client_in(server)
-    player = await voice_client.create_ytdl_player(url)
+    player = await voice_client.create_ytdl_player(url, after=lambda: check_queue(server.id))
     players[server.id] = player
     player.start()
     await bot.say("now playing")
@@ -88,11 +95,23 @@ async def dev(ctx):
     await bot.say("`speed#3413`")
 
 @bot.command(pass_context=True)
+async def queue(ctx, url):
+    server = ctx.message.server
+    voice_client = bot.voice_client_in(server)
+    player = await voice_client.create_ytdl_player(url, after=lambda: check_queue(server.id))
+
+    if server.id in queues:
+        queues[server.id].append(player)
+    else:
+            queues[server.id] = [player]
+            await bot.say("ok queued")
+
+@bot.command(pass_context=True)
 async def help(ctx):
     embed=discord.Embed(title="help", description="thank you pylint, very cool!", color=0x00FFDD)
     embed.add_field(name="useful stuff", value="`$say, $dev, $math, $8ball, $invite`", inline= True)
     embed.add_field(name="useless stuff", value="`nothing useless yet`", inline= True)
-    embed.add_field(name="music", value="`$join, $leave, $play, $pause, $resume`")
+    embed.add_field(name="music", value="`$join, $leave, $play, $pause, $resume, $queue`")
     await bot.say(embed=embed)
             
 bot.run("TOKEN")
