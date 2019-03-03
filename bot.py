@@ -56,6 +56,7 @@ async def divide(ctx, a: int, b: int):
 async def join(ctx):
     channel = ctx.message.author.voice.voice_channel
     await bot.join_voice_channel(channel)
+    await bot.say("SUP CRACKHEADS")
 
 @bot.command(pass_context=True)
 async def ping(ctx):
@@ -69,6 +70,7 @@ async def leave(ctx):
     server = ctx.message.server
     voice_client = bot.voice_client_in(server)
     await voice_client.disconnect()
+    await bot.say("bye cucke")
 
 @bot.command(pass_context=True)
 async def play(ctx, url):
@@ -124,5 +126,5 @@ async def help(ctx):
     embed.add_field(name="useless stuff", value="`nothing useless yet`", inline= True)
     embed.add_field(name="music", value="`$join, $leave, $play, $pause, $resume, $queue`")
     await bot.say(embed=embed)
-    
+            
 bot.run("TOKEN")
